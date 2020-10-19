@@ -1,0 +1,9 @@
+{
+    "id": 2,
+    "brand": "Volvo",
+    "model": "745 GL",
+    "year": "1988",
+    "image": "volvo_745_gl.jpg",
+    "engine": "v4 2.0",
+    "effect": "80 hp"
+}

@@ -1,0 +1,9 @@
+{
+    "id": 4,
+    "brand": "Nissan",
+    "model": "Leaf",
+    "year": "2012",
+    "image": "nissan_leaf.jpg",
+    "engine": "electric lol",
+    "effect": "40 hp"
+}

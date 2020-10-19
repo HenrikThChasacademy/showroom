@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "brand": "Saab",
+    "model": "900 Turbo",
+    "year": "1992",
+    "image": "saab_900_turbo.jpg",
+    "engine": "v4 2.0 turbo",
+    "effect": "140 hp"
+}

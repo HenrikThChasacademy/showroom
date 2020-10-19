@@ -1,0 +1,40 @@
+{
+    "carList": 
+    [
+        {
+            "id": 1,
+            "brand": "Saab",
+            "model": "900 Turbo",
+            "year": "1992",
+            "image": "saab_900_turbo.jpg"
+        },
+        {
+            "id": 2,
+            "brand": "Volvo",
+            "model": "745 GL",
+            "year": "1988",
+            "image": "volvo_745_gl.jpg"
+        },
+        {
+            "id": 3,
+            "brand": "BMW",
+            "model": "525i",
+            "year": "2001",
+            "image": "bwm_525i.jpg"
+        },
+        {
+            "id": 4,
+            "brand": "Nissan",
+            "model": "Leaf",
+            "year": "2012",
+            "image": "nissan_leaf.jpg"
+        },
+        {
+            "id": 5,
+            "brand": "Fiat",
+            "model": "Uno",
+            "year": "1985",
+            "image": "fiat_uno.jpg"
+        }
+    ]
+}

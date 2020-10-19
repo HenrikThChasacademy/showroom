@@ -1,0 +1,9 @@
+{
+    "id": 3,
+    "brand": "BMW",
+    "model": "525i",
+    "year": "2001",
+    "image": "bwm_525i.jpg",
+    "engine": "v4 2.5",
+    "effect": "180 hp"
+}
