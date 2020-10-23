@@ -2,7 +2,7 @@ import React from 'react';
 import './car.scss';
 
 function Car(props) {
-    const imagePath = "./images/"+props.car.image;
+    const imagePath = "./images/"+props.car.imagePath;
 
     return(
         <div className="car-container" onClick={() => props.handleCarClick(props.car.id)}> 

@@ -3,7 +3,7 @@
     "brand": "Fiat",
     "model": "Uno",
     "year": "1985",
-    "image": "fiat_uno.jpg",
+    "imagePath": "fiat_uno.jpg",
     "engine": "v4 1.2",
     "effect": "One million"
 }

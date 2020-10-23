@@ -4,15 +4,16 @@ import axios from 'axios';
 import Cars from './components/cars/cars';
 import CarSpecs from './components/car-specs/car-specs';
 
-const SHOWROOM_SERVICE_URL = 'car';
-const SHOWROOM_API_URL = './data/';
-const FILE_EXTENSION = '.json';
+const SHOWROOM_SERVICE_URL = '/car';
+const SHOWROOM_API_URL = 'http://ec2co-ecsel-zljb6vewvqz1-1826011212.eu-west-1.elb.amazonaws.com:81';
+
 class App extends Component {
   state = {
     carList: [],
     isFetching: false,
     isFetchingCarInfo: false,
     selectedCar: null,
+    isEdit:false,
   }
 
   componentDidMount() {
@@ -22,9 +23,9 @@ class App extends Component {
   fetchCars = async () => {
     try{
         this.setState({isFetching: true});
-        const response = await axios(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL+FILE_EXTENSION);
-        console.log(response.data.carList)
-        this.setState({carList: response.data.carList, isFetching: false})
+        const response = await axios(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL);
+        console.log(response.data)
+        this.setState({carList: response.data, isFetching: false})
     } catch(e) {
         console.log(e);
         this.setState({isFetching: false});
@@ -34,13 +35,63 @@ class App extends Component {
   fetchCar = async (id) => {
     try{
       this.setState({isFetchingCarInfo: true});
-      const response = await axios(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL+'/'+id+FILE_EXTENSION);
+      const response = await axios(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL+'/' +id);
       console.log(response.data)
       this.setState({selectedCar: response.data, isFetchingCarInfo: false})
-  } catch(e) {
-      console.log(e);
-      this.setState({isFetchingCarInfo: false});
-  };
+    } catch(e) {
+        console.log(e);
+        this.setState({isFetchingCarInfo: false});
+    };
+  }
+
+  handleAddNewCar = async () => {
+    let newCar = { brand: '', model: '', year: '', engine: '', effect: '', imagePath: ''}
+    this.setState({selectedCar: newCar, isEdit: true})
+  }
+
+  handleSaveCar = async (car) => {
+    try{
+      this.setState({isFetchingCarInfo: true});
+      await axios.post(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL, car);
+      await this.fetchCars();
+      this.setState(state => ({
+        selectedCar: null, isFetchingCarInfo: false,
+        isEdit: false
+      }))
+    } catch(e) {
+        console.log(e);
+        this.setState({isFetchingCarInfo: false});
+    };
+  }
+
+  handleRemoveCar = async (id) => {
+    try{
+      this.setState({isFetchingCarInfo: true});
+      console.log(id);
+      await axios.delete(SHOWROOM_API_URL+SHOWROOM_SERVICE_URL +'/' +id);
+      await this.fetchCars();
+      this.setState(state => ({
+        selectedCar: null, isFetchingCarInfo: false,
+        isEdit: false
+      }))
+    } catch(e) {
+        console.log(e);
+        this.setState({isFetchingCarInfo: false});
+    };
+  }
+
+  handleEditCarValue = (value) => {
+    console.log(value);
+    this.setState(state => ({
+      ...state.selectedCar,
+        selectedCar: value
+    }))
+  }
+
+  handleEditCar = () => {
+    this.setState(state => ({
+      isEdit: !state.isEdit
+    }))
   }
 
   handleCarClick = (id) => {
@@ -68,6 +119,7 @@ class App extends Component {
             <Cars 
             carList={this.state.carList}
             handleCarClick={this.handleCarClick}
+            handleAddNewCar={this.handleAddNewCar}
             />
           }
           {
@@ -75,6 +127,11 @@ class App extends Component {
             <CarSpecs
               handleBack={this.handleBack}
               car={this.state.selectedCar}
+              isEdit={this.state.isEdit}
+              handleEditCar={this.handleEditCar}
+              handleSaveCar={this.handleSaveCar}
+              handleEditCarValue={this.handleEditCarValue}
+              handleRemoveCar={this.handleRemoveCar}
             />
           }
         </div>
